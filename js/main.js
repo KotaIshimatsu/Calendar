@@ -1,10 +1,10 @@
-'ues strict';
+'use strict';
 
 console.clear();
 
 {
-    const year = 2020;
-    const month = 4; //5月
+    let year = 2020;
+    let month = 4; // 5月
 
     function getCalendarHead() {
         const dates = [];
@@ -52,6 +52,14 @@ console.clear();
     }
 
     function createCalendar() {
+        const tbody = document.querySelector('tbody');
+
+        while (tbody.firstChild) {
+            tbody.removeChild(tbody.firstChild);
+        }
+        const title = `${year}/${String(month + 1).padStart(2, '0')}`;
+        document.getElementById('title').textContent = title;
+
         const dates = [
             ...getCalendarHead(),
             ...getCalendarBody(),
@@ -82,6 +90,25 @@ console.clear();
             document.querySelector('tbody').appendChild(tr);
         });
     }
+
+    document.getElementById('prev').addEventListener('click', () => {
+        month--;
+        if (month < 0) {
+            year--;
+            month = 11;
+        }
+
+        createCalendar();
+    });
     
+    document.getElementById('next').addEventListener('click', () => {
+        month++;
+        if (month > 11) {
+            year++;
+            month = 0;
+        }
+
+        createCalendar();
+    });
     createCalendar();
 }
