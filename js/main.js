@@ -6,7 +6,7 @@ console.clear();
     const today = new Date();
     let year = today.getFullYear();
     let month = today.getMonth();
-
+    console.log(month);
     function getCalendarHead() {
         const dates = [];
         const d = new Date(year, month, 0).getDate();
@@ -34,8 +34,8 @@ console.clear();
             });
         }
 
-        if (year ===today.getFullYear() && month === today.getMonth()) {
-            dates[today.getDate() -1].isToday = true;
+        if (year === today.getFullYear() && month === today.getMonth()) {
+            dates[today.getDate() - 1].isToday = true;
         }
 
         return dates;
@@ -122,6 +122,13 @@ console.clear();
             year++;
             month = 0;
         }
+
+        createCalendar();
+    });
+
+    document.getElementById('today').addEventListener('click', () => {
+        year = today.getFullYear();
+        month = today.getMonth();
 
         createCalendar();
     });
